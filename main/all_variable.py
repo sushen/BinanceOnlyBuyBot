@@ -1,0 +1,14 @@
+import os
+
+
+class Variable:
+    DOLLAR = 12
+    CRIPTO_SYMBOL = 'LPTBUSD'
+    STATIC_DAY = 4
+    CANDLE_PATTERN_LOGBACK = "10"
+    STOP_LOSS = .025
+    DAYS_YOU_RUN_THE_PROGRAM = 7
+    CHANGE_STOP_LOSS_WHEN_BUYING_PRICE_CHANGE = 0.25
+    STOP_LOSS_QTY = 2
+    BUYING_STOP_LOSS = .005
+    MAIL = os.environ.get('GMAIL')

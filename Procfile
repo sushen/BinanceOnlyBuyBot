@@ -1,0 +1,1 @@
+worker: python buy/buying_strategy.py
