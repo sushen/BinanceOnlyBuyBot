@@ -9,18 +9,15 @@ from main.all_variable import Variable
 from real_time_data.real_time_data import RealTimeData
 
 
-class BuyingStrategy(RealTimeData):
-    def __init__(self, symbol):
-        self.symbol = symbol
+class BuyingStrategy(RealTimeData, BuyCripto):
 
-    def buying_condition(self):
-        currency_symbol = self.symbol
-        avg_price = APICall.client.get_avg_price(symbol=currency_symbol)
+    def buying_condition(self, symbol):
+        avg_price = APICall.client.get_avg_price(symbol=symbol)
         finding_price = float(avg_price['price'])
         Buying_condition = True
         lowest_price = []
         while Buying_condition:
-            self.streamKline(currency=currency_symbol.lower(), interval="1m")
+            self.streamKline(currency=symbol.lower(), interval="1m")
             current_price = float(RealTimeData.append_currency[-1])
             if len(lowest_price) == 0:
                 lowest_price.append(current_price)
@@ -33,18 +30,18 @@ class BuyingStrategy(RealTimeData):
             total_current = Variable.DOLLAR / current_price
             total_buying_point = Variable.DOLLAR / decrease_price_with_stop_loss
             print("------------------------------------")
-            print(f"|   Try to Buy {currency_symbol} Currency   |")
+            print(f"|   Try to Buy {symbol} Currency   |")
             print("------------------------------------")
             print(f"{finding_price} & Total {total_find} FINDING PRICE")
             print(f"{current_price} & Total {total_current} CURRENT PRICE")
             print(f"{lowest_price_main} & Total {Variable.DOLLAR/lowest_price_main} DOWN PRICE")
             print(f"\n{decrease_price_with_stop_loss} & Total {total_buying_point} BUYING POINT\n")
             if decrease_price_with_stop_loss <= current_price:
-                BuyCripto().coin_buy(self, symbol=currency_symbol)
-                # print("Buy Done")
+                self.coin_buy(symbol=symbol)
+                print(input("Buy Done :"))
                 Buying_condition = False
 
 
 currency_symbol = Variable.CRIPTO_SYMBOL
-BuyingStrategy(currency_symbol).buying_condition()
+BuyingStrategy().buying_condition(currency_symbol)
 
