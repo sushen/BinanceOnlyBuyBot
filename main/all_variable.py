@@ -3,7 +3,7 @@ import os
 
 class Variable:
     DOLLAR = 12
-    CRIPTO_SYMBOL = 'LPTBUSD'
+    CRIPTO_SYMBOL = 'SCRTBUSD'
     STATIC_DAY = 4
     CANDLE_PATTERN_LOGBACK = "10"
     STOP_LOSS = .025
