@@ -1,5 +1,3 @@
-import sys
-
 from buy.buy_cripto import BuyCripto
 
 from api_callling.api_calling import APICall
